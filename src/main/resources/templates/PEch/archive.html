@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>PEch</title>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.24.1/sweetalert2.all.js"></script>
+<script src="js/archive.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/archive.css">
+<!-- ファビコン設置 -->
+<link rel="icon" type="image/jpg" href="image/PEch.jpg">
+
+</head>
+<body>
+  <!-- header -->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
+    <ul class="navbar-nav mr-auto">
+    	<li><a class="navbar-brand" href="archive"><p class="mb-0" id="logo">PEch</p></a></li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="archive"><button type="button" class="btn btn-danger">トップ</button></a>
+      </li>
+      &nbsp;&nbsp;
+      <li class="nav-item">
+        <button type="button" id="open_create_threads" class="btn btn-danger"><i class="fas fa-plus"></i>スレ作成</button>
+      </li>
+      &nbsp;&nbsp;
+      <li class="nav-item">
+        <!-- ログアウト機能追加　馬場 -->
+        <form action="logout">
+			<input type="submit" class="btn btn-danger" value="ログアウト"/>
+		</form>
+      </li>
+      &nbsp;&nbsp;
+      <li class="nav-item">
+       	<font color="yellow"><a th:text="${user_name}">ゲスト</a></font>
+       	<a><font color="#FFFFFF">さん</font></a>
+      </li>
+    </ul>
+  </nav>
+  
+  <!-- main -->
+  <div class="container-fluid" style="margin-top:120px">
+  	<div class="offset-lg-2 col-lg-8">
+  	
+     <!-- search_box -->
+     <div class="search_box offset-lg-3">
+	      <!-- pulldown -->
+	      <label>カテゴリ&emsp;：</label>&nbsp;
+	      <select name="category">
+	      </select>
+	      <br>
+	      
+	      <!-- keyword -->
+	      <label>キーワード：</label>&nbsp;
+	      <input id="keyword" type="text"><button id="search">検索</button>
+    </div>
+
+    <!-- threads -->
+    <table class="table table-hover mt-5 text-center">
+      <thead>
+        <tr>
+          <th>作成日</th>
+          <th>スレッドタイトル</th>
+          <th>カテゴリ</th>
+          <!-- <th>作成者</th> -->
+          <th>レス数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- ＪＳでデータ挿入 -->
+      </tbody>
+    </table>
+    </div>
+  </div>
+  
+  <!-- ページ -->
+  <div class="cal-lg-12">
+	  <div id="page" class="text-center mb-5">
+		  <p id="now_draw_num"></p>
+		  <button class="page_change" id="prev_page"><<</button>
+		  <button id="now_page"></button>
+		  <button class="page_change" id="next_page">>></button>
+	  </div>
+  </div>
+  <!-- //ページ -->
+
+<div class="create_threads_mask"></div>
+  <!-- create threads -->
+    <div class="card border-dark offset-lg-3 col-lg-6 p-0 create_threads text-center">
+        <div class="card-header bg-dark text-white">
+          スレ作成
+        </div>
+          <div class="card-body">
+            <form action="createThread" method="get">
+
+              <div class="form-group">
+                <label>カテゴリ&emsp;：</label>&nbsp;
+                <select name="categoryId">
+                	<!-- ＪＳでデータ挿入 -->
+                </select>
+              </div>
+              <!-- keyword -->
+              <div id="add_category" class="form-group">
+                <label>新規カテゴリ：</label>&nbsp;
+                <input type="text" name="newCategory" autocomplete="off">
+              </div>
+
+
+              <div class="form-group">
+                <input type="text" name="threadName" class="form-control" id="" placeholder="スレッド名" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="res" id="message" rows="5" placeholder="本文"></textarea>
+              </div>
+              <button type="submit" class="btn btn-danger">作成</button>
+            </form>
+          </div>
+        </div>
+
+
+</body>
+</html>
